@@ -26,6 +26,7 @@ open class OpaqueTextLayer: CATextLayer {
     
     private func initialize() {
         contentsScale = UIScreen.main.scale
+        backgroundColor = UIColor.white.cgColor
         isOpaque = true
     }
     
