@@ -51,19 +51,19 @@ open class OpaqueTextLayer: CATextLayer {
         set { super.bounds = newValue.ot_sharp }
     }
     
-    public func update(attributed txt: NSAttributedString, startPoint: CGPoint = .zero, width: CGFloat = UIScreen.main.bounds.width, extraHeightForEmoji: CGFloat = 4, lineHeight: CGFloat = UIFont.systemFont(ofSize: 17).lineHeight) {
-        let realHeight = ceil(lineHeight)
+    public func update(txt: String, font: UIFont = UIFont.systemFont(ofSize: 17), color: UIColor = .black, startPoint: CGPoint = .zero, width: CGFloat = UIScreen.main.bounds.width, extraHeightForEmoji: CGFloat = 4) {
+        let realHeight = ceil(font.lineHeight)
         let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let emoji = txt.string.emojiInside
-        let mu = NSMutableAttributedString(attributedString: txt)
+        let emoji = txt.emojiInside
+        let mu = NSMutableAttributedString(string: txt, attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : color])
         var rect: CGRect = .zero
         let p = NSMutableParagraphStyle()
         p.minimumLineHeight = realHeight
         if emoji { p.minimumLineHeight += extraHeightForEmoji }
-        mu.addAttributes([NSParagraphStyleAttributeName : p], range: NSMakeRange(0, txt.string.characters.count))
+        mu.addAttributes([NSParagraphStyleAttributeName : p], range: NSMakeRange(0, txt.characters.count))
         rect = mu.boundingRect(with: size, options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
         rect.origin = startPoint
-        if rect.height <= lineHeight && emoji {
+        if rect.height <= realHeight && emoji {
             rect.size.height += extraHeightForEmoji
             rect.origin.y -= extraHeightForEmoji
         }
