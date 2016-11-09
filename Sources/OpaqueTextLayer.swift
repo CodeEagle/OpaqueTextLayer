@@ -38,4 +38,23 @@ open class OpaqueTextLayer: CATextLayer {
         }
         super.draw(in: ctx)
     }
+    
+    open override var frame: CGRect {
+        get { return super.frame }
+        set { super.frame = newValue.ot_sharp }
+    }
+    
+    open override var bounds: CGRect {
+        get { return super.bounds }
+        set { super.bounds = newValue.ot_sharp }
+    }
+}
+
+private extension CGRect {
+    var ot_sharp: CGRect {
+        var old = self
+        old.size.width = ceil(old.width)
+        old.size.height = ceil(old.height)
+        return old
+    }
 }
