@@ -68,7 +68,7 @@ open class OpaqueTextLayer: CATextLayer {
             rect.origin.y -= extraHeightForEmoji
         }
         string = mu
-        frame = rect
+        frame = rect.ot_sharp
     }
 }
 

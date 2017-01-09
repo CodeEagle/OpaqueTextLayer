@@ -46,9 +46,8 @@ class ViewController: UIViewController {
         
         ({
             let text = OpaqueTextLayer()
-            text.update(txt: "测试123123‼⁉™")
-            text.frame.origin.y = 600
-            text.backgroundColor = UIColor.orange.cgColor
+            text.update(txt: "我", font: UIFont.systemFont(ofSize: 12), color: .black, startPoint: CGPoint(x: 10, y: 640), width: 120.1233)
+            text.backgroundColor = UIColor.yellow.cgColor
             view.layer.addSublayer(text)
             }())
         // Do any additional setup after loading the view, typically from a nib.
